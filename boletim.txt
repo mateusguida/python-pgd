@@ -1,8 +1,8 @@
-A nota da matemática foi 7.8
-A nota da português foi 8.2
+A nota da matemÃ¡tica foi 7.8
+A nota da portuguÃªs foi 8.2
 A nota da filosofia foi 9.5
-A nota da história foi 5.7
-A nota da física foi 9.8
+A nota da histÃ³ria foi 5.7
+A nota da fÃ­sica foi 9.8
 A nota da geografia foi 10
-A nota da química foi 6.4
-A nota da bilogia foi 7.0
+A nota da quÃ­mica foi 6.4
+A nota da biologia foi 7.0

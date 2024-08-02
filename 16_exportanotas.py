@@ -20,5 +20,5 @@ lista = []
 for i in range(len(notas)):
     lista.append(f"A nota da {disciplinas[i]} foi {notas[i]}\n")
 
-with open("boletim.txt", 'a') as arq:
+with open("boletim.txt", 'a', encoding='utf-8') as arq:
     arq.writelines(lista)
