@@ -1,0 +1,23 @@
+1) Implemente um programa que dá um desconto de 12% sobre o preço de um item à venda, exibindo o valor final e o desconto.
+
+2) Implemente um programa que responde se um número é primo ou não. Você pode assumir que este número não será maior que 10000 (dez mil).
+
+3) Faça um programa que calcule a distância Euclidiana entre dois pontos do plano cartesiano.
+
+4) Dados 3 valores numéricos não negativos, responda se é possível existir um triângulo cujas medidas sejam estes valores
+
+5)  Dada uma string com uma única letra e uma outra string qualquer, responda quantas vezes a letra está presente na outra string. Exemplos:
+    “a”; “abacaxi”: 3
+    “c”; “bola”: 0
+    “u”; “”: 0
+
+6) Ainda considerando uma string com uma única letra e uma outra string qualquer, responda com uma lista de índices indicando as posições em que a letra está presente. Exemplos:
+    “a”; “abacaxi”: [0, 2, 4]
+    “c”; “bola”: []
+    “u”; “fuleiro”: [1]
+
+7) Faça um programa que analisa um valor de idade de um indivíduo e responde se ele “é obrigado a votar”, “tem voto facultativo” ou “é proibido de votar”, usando os critérios adotados no Brasil. Você pode ignorar critérios não baseados na idade. DESAFIO: implemente os demais critérios estabelecidos na Constituição Federal de 1988.
+
+8) Faça um programa que leia um arquivo de texto em que cada linha tem dois números separados por espaço em branco. Para cada linha, some os números e salve os resultados em um outro arquivo de texto (cada linha deve conter o resultado da soma da linha correspondente).
+
+9) Faça um programa que escreva um arquivo CSV* (valores separados por vírgulas), que armazene os nomes de alunos de uma escola e as suas notas em diversas disciplinas.
