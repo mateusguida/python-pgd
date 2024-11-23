@@ -23,12 +23,13 @@ cria_diretorio("VIDEOS") # MP4
 cria_diretorio("MUSICAS") # MP3
 cria_diretorio("TEXTOS") # TXT, PDF, DOCX
 
-for nome in os.listdir(PASTA):
-  if nome.endswith(".jpg") or nome.endswith(".png"):
-    move_arquivo(nome, 'IMAGENS')
-  elif nome.endswith(".mp4"):
-    move_arquivo(nome, 'VIDEOS')
-  elif nome.endswith(".mp3"):
-    move_arquivo(nome, 'MUSICAS')
-  elif nome.endswith(".txt") or nome.endswith(".pdf") or nome.endswith(".docx"):
-    move_arquivo(nome, 'TEXTOS')
+if __name__ == '__main__':
+  for nome in os.listdir(PASTA):
+    if nome.endswith(".jpg") or nome.endswith(".png"):
+      move_arquivo(nome, 'IMAGENS')
+    elif nome.endswith(".mp4"):
+      move_arquivo(nome, 'VIDEOS')
+    elif nome.endswith(".mp3"):
+      move_arquivo(nome, 'MUSICAS')
+    elif nome.endswith(".txt") or nome.endswith(".pdf") or nome.endswith(".docx"):
+      move_arquivo(nome, 'TEXTOS')
