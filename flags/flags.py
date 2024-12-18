@@ -1,6 +1,6 @@
 from PIL import Image
-from cores import VERDE, AMARELO, AZUL, BRANCO, VERMELHO
-from formas import pintar_losango, pintar_circulo, pintar_faixa
+from cores import VERDE, AMARELO, AZUL_BR, AZUL_FR, BRANCO, VERMELHO_JP, VERMELHO_GR, VERMELHO_FR, DOURADO, PRETO
+from formas import pintar_losango, pintar_circulo, pintar_faixa, pintar_faixa_hor, pintar_faixa_vert
 
 def bandeira_brasileira(largura):
   M = largura / 14
@@ -26,7 +26,7 @@ def bandeira_brasileira(largura):
   raio = 3.5 * M
   
   # cria e pinta o círculo
-  pintar_circulo(img, centro, raio, AZUL)
+  pintar_circulo(img, centro, raio, AZUL_BR)
 
   # calcula centro das faixas
   centro_arcos = (comprimento / 2 - 2 * M, largura - 1)
@@ -41,17 +41,42 @@ def bandeira_brasileira(largura):
 
 
 def bandeira_japao(largura):
-  M = largura / 14
-  comprimento = int(M * 20)
+  M = largura / 3
+  comprimento = int(M * 2)
 
-  # pinta toda a área da bandeira de verde
-  img = Image.new("RGB", (comprimento,largura), BRANCO)
+  # pinta toda a área da bandeira de branco
+  img = Image.new("RGB", (largura, comprimento), BRANCO)
 
   # calculando centro e raio do círculo
   centro = (comprimento // 2, largura // 2)
   raio = 3.5 * M
  
   # cria e pinta o círculo
-  pintar_circulo(img, centro, raio, VERMELHO)
+  pintar_circulo(img, centro, raio, VERMELHO_JP)
 
   return img, 'japao.png'
+
+
+def bandeira_alemanha(largura):
+  M = largura / 3
+  comprimento = int(M * 2)
+
+  # pinta toda a área da bandeira de preto
+  img = Image.new("RGB", (largura, comprimento), PRETO)
+
+  # cria e pinta as faixas horizontais
+  pintar_faixa_hor(img, VERMELHO_GR, DOURADO)
+
+  return img, 'alemanha.png'
+
+def bandeira_franca(largura):
+  M = largura / 3
+  comprimento = int(M * 2)
+
+  # pinta toda a área da bandeira de preto
+  img = Image.new("RGB", (largura, comprimento), BRANCO)
+
+  # cria e pinta as faixas verticais
+  pintar_faixa_vert(img, AZUL_FR, VERMELHO_FR)
+
+  return img, 'franca.png'

@@ -60,3 +60,25 @@ def pintar_faixa(img, centro, raios, circ_ext, cor):
           d2_ext <= r2_ext
           ):
         canva[i,j] = cor
+
+def pintar_faixa_hor(img, cor1, cor2):
+  canva = img.load()
+  width, height = img.size
+
+  offset = height // 3
+
+  for i in range (width): # x
+    for j in range(offset): # y
+      canva[i,j + offset] = cor1
+      canva[i,j + 2*offset] = cor2
+
+def pintar_faixa_vert(img, cor1, cor2):
+  canva = img.load()
+  width, height = img.size
+
+  offset = width // 3
+
+  for i in range (offset): # x
+    for j in range(height): # y
+      canva[i,j] = cor1
+      canva[i + 2*offset,j] = cor2
