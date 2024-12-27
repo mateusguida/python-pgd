@@ -1,5 +1,5 @@
 from reportlab.lib import colors
-from reportlab.graphics.shapes import Drawing, Rect
+from reportlab.graphics.shapes import (Drawing, Rect, Circle)
 
 OUT_DIR = "grafica"
 WIDTH = 640
@@ -29,6 +29,17 @@ def draw_background(drawing,
                     strokeColor = PG_COLORS["blue"])
   drawing.add(inner_rect)
 
+def draw_profile_picture(drawing: Drawing):
+  w = drawing.width
+  h = drawing.height
+  cx = w // 4
+  cy = h // 2
+  r = h // 4
+  circ_frame = Circle(cx, cy, r, strokeColor=PG_COLORS["green"], fillColor=PG_COLORS["green"])
+  drawing.add(circ_frame)
+  # TODO: adicionar foto
+  # VIDEO = 1:08:06
+
 if __name__ == '__main__':
   
   # cria o espaço
@@ -36,6 +47,9 @@ if __name__ == '__main__':
 
   # desenha o fundo
   draw_background(drawing, (16,16))
+
+  # desenha foto do fã
+  draw_profile_picture(drawing)
 
   #save
   drawing.save(formats=['pdf','png'], outDir=OUT_DIR, fnRoot="carteirinha")
