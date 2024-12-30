@@ -1,7 +1,15 @@
 from reportlab.lib import colors
-from reportlab.graphics.shapes import (Drawing, Rect, Circle)
+from reportlab.graphics.shapes import (Drawing, Rect, Circle, String)
+from reportlab.pdfbase.pdfmetrics import registerFont
+from reportlab.pdfbase.ttfonts import TTFont
+
+import json, os
+
+registerFont(TTFont("FiraSans", "assets/FiraSans-Regular.ttf"))
+registerFont(TTFont("FiraSans-Bold", "assets/FiraSans-Bold.ttf"))
 
 OUT_DIR = "grafica"
+DATA_DIR = "data"
 WIDTH = 640
 HEIGHT = 360
 
@@ -28,17 +36,60 @@ def draw_background(drawing,
                     fillColor = PG_COLORS["blue"],
                     strokeColor = PG_COLORS["blue"])
   drawing.add(inner_rect)
+  return inner_rect.getBounds()
 
 def draw_profile_picture(drawing: Drawing):
   w = drawing.width
   h = drawing.height
   cx = w // 4
   cy = h // 2
-  r = h // 4
+  r = h // 4 + 8
   circ_frame = Circle(cx, cy, r, strokeColor=PG_COLORS["green"], fillColor=PG_COLORS["green"])
   drawing.add(circ_frame)
+  return circ_frame.getBounds()
   # TODO: adicionar foto
-  # VIDEO = 1:08:06
+
+def draw_name_and_username(drawing: Drawing, x, y, margin=(16,32)):
+  with open(os.path.join(DATA_DIR, "user.json"), "r") as userfile:
+    content = userfile.read()
+    user = json.loads(content)
+  xmargin = margin[0]
+  ymargin = margin[1]
+  name = String(x + xmargin, y - ymargin,
+                user['name'],
+                fontSize=28,
+                fontName="FiraSans-Bold",
+                fillColor=colors.white,
+                strokeColor=colors.white)
+  y = name.getBounds()[1]
+  username = String(x + xmargin, y - ymargin,
+                f"@{user['username']}",
+                fontSize=28,
+                fontName="FiraSans",
+                fillColor=colors.white,
+                strokeColor=colors.white)
+  y = username.getBounds()[1]
+
+  msg = f"Sou fã de carteirinha do\nProgramação Dinâmica\ndesde {user['subscribed_since']}."
+  lines = msg.split("\n")
+  texts = []
+  for line in lines:
+    mul = 0.8 if texts else 1.8
+    since = String(x + xmargin, y - int(mul * ymargin),
+                  line,
+                  fontSize=24,
+                  fontName="FiraSans-Bold",
+                  fillColor=colors.white,
+                  strokeColor=colors.white)
+    y = since.getBounds()[1]
+    texts.append(since)
+
+  drawing.add(name)
+  drawing.add(username)
+  for elem in texts:
+    drawing.add(elem)
+
+  return texts[-1].getBounds()
 
 if __name__ == '__main__':
   
@@ -49,7 +100,10 @@ if __name__ == '__main__':
   draw_background(drawing, (16,16))
 
   # desenha foto do fã
-  draw_profile_picture(drawing)
+  bbox = draw_profile_picture(drawing)
+
+  # acrescenta texto
+  draw_name_and_username(drawing, bbox[2], bbox[3])
 
   #save
   drawing.save(formats=['pdf','png'], outDir=OUT_DIR, fnRoot="carteirinha")
