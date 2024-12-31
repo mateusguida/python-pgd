@@ -1,3 +1,5 @@
+from reportlab.pdfgen import canvas
+from reportlab.graphics import renderPDF
 from reportlab.lib import colors
 from reportlab.graphics.shapes import (Drawing, Rect, Circle, String)
 from reportlab.pdfbase.pdfmetrics import registerFont
@@ -38,7 +40,7 @@ def draw_background(drawing,
   drawing.add(inner_rect)
   return inner_rect.getBounds()
 
-def draw_profile_picture(drawing: Drawing):
+def draw_profile_frame(drawing: Drawing):
   w = drawing.width
   h = drawing.height
   cx = w // 4
@@ -46,8 +48,8 @@ def draw_profile_picture(drawing: Drawing):
   r = h // 4 + 8
   circ_frame = Circle(cx, cy, r, strokeColor=PG_COLORS["green"], fillColor=PG_COLORS["green"])
   drawing.add(circ_frame)
+
   return circ_frame.getBounds()
-  # TODO: adicionar foto
 
 def draw_name_and_username(drawing: Drawing, x, y, margin=(16,32)):
   with open(os.path.join(DATA_DIR, "user.json"), "r") as userfile:
@@ -91,19 +93,45 @@ def draw_name_and_username(drawing: Drawing, x, y, margin=(16,32)):
 
   return texts[-1].getBounds()
 
+def draw_profile_picture(myCanva: canvas.Canvas, framebb, margin = 16):
+  myCanva.drawImage("assets/avatar_cropped.png",
+                    framebb[0] + margin // 2,
+                    framebb[1] + margin // 2,
+                    framebb[2] - framebb[0] - margin,
+                    framebb[3] - framebb[1] - margin,
+                    mask=(0, 1, 0, 1, 0, 1))
+  myCanva.drawImage("assets/logo_cropped.png",
+                    framebb[2] - 4 * margin,
+                    framebb[1],
+                    64,
+                    64,
+                    mask=(0, 1, 0, 1, 0, 1))
+
 if __name__ == '__main__':
   
+  myCanva = canvas.Canvas(os.path.join(OUT_DIR, "carteirinha.pdf"), (WIDTH,HEIGHT))
+
   # cria o espaço
   drawing = Drawing(WIDTH,HEIGHT)
 
   # desenha o fundo
   draw_background(drawing, (16,16))
 
-  # desenha foto do fã
-  bbox = draw_profile_picture(drawing)
+  # desenha frame para foto do fã
+  bbox = draw_profile_frame(drawing)
 
   # acrescenta texto
   draw_name_and_username(drawing, bbox[2], bbox[3])
 
-  #save
-  drawing.save(formats=['pdf','png'], outDir=OUT_DIR, fnRoot="carteirinha")
+  # acrescenta o desenho da carteirinha e depois a foto do fã
+  renderPDF.draw(drawing, myCanva, 0, 0)
+  draw_profile_picture(myCanva, bbox)
+
+  # salvamento antigo, usando Drawing - problemas para colocar a foto
+  # drawing.save(formats=['pdf','png'], outDir=OUT_DIR, fnRoot="carteirinha")
+
+  # salva pdf
+  myCanva.save()
+
+  # mensagem de confirmação
+  print("Carteirinha gerada com sucesso!")
