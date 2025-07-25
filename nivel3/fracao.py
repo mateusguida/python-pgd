@@ -40,8 +40,14 @@ class Fracao:
     else:
       return self.num * rhs.den >= rhs.num * self.den
 
+def ler_fracao():
+  numerador = int(input("Digite o numerador da fração: "))
+  denominador = int(input("Digite o denominador da fração: "))
+  return Fracao(numerador, denominador)
+
 if __name__ == '__main__':
-  fracao1 = Fracao(1, 3)
+  #fracao1 = Fracao(1, 3)
+  fracao1 = ler_fracao()
   print(fracao1)
 
   fracao2 = Fracao(2, 6)
