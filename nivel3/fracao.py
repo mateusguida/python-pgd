@@ -25,6 +25,11 @@ class Fracao:
       den_r = den1 * den2
       num_r = (num1 * den2) + (num2 * den1)
     return Fracao(num_r, den_r)
+
+  def __radd__(self, lhs):
+    if isinstance(lhs, int):
+      return self + lhs
+    raise TypeError(f"Operação + não suportada entre {type(self)} e {type(lhs)}")
   
   # negação
   def __neg__(self):
@@ -33,6 +38,9 @@ class Fracao:
   # subtração
   def __sub__(self, rhs):
     return self + (-rhs)
+  
+  def __rsub__(self, lhs):
+    return (-self) + lhs
   
   # multiplicação
   def __mul__(self, rhs):
@@ -44,6 +52,9 @@ class Fracao:
     den = self.denominador * den2
     return Fracao(num, den)
   
+  def __rmul__(self, lhs):
+    return self * lhs
+  
   # divisão
   def __truediv__(self, rhs):
     if isinstance(rhs, int):
@@ -51,6 +62,11 @@ class Fracao:
     else:
       num, den = rhs.denominador, rhs.numerador
     return self * Fracao(num, den)
+  
+  def __rtruediv__(self, lhs):
+    if isinstance(lhs, int):
+      return Fracao(lhs, 1) / self
+    raise TypeError(f"Operação / não suportada entre {type(lhs)} e {type(self)}")
 
   # comparador ==, !=
   def __eq__(self, rhs):
@@ -101,3 +117,6 @@ if __name__ == '__main__':
     print(f"A fração {fracao1} é igual a {fracao2}?", fracao1 == fracao2)
     print(f"A fração {fracao1} é menor ou igual a {fracao2}?", fracao1 <= fracao2)
     print(f"A fração {fracao1} é maior ou igual a {fracao2}?", fracao1 >= fracao2)
+
+    print(f"A multiplicação de {fracao1} com 7 é", 7 * fracao1)
+    print(f"A divisão de {fracao1} com 7 é", 7 / fracao1)
