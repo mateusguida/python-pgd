@@ -108,15 +108,25 @@ if __name__ == '__main__':
     # print(fracao.numerador, fracao.denominador)
     # print("A fração é:", fracao)
 
+    # Operações aritméticas com frações
     print(f"A soma das fracoes {fracao1} e {fracao2} é", fracao1 + fracao2)
     print(f"A diferença das fracoes {fracao1} e {fracao2} é", fracao1 - fracao2)    
     print(f"O produto das fracoes {fracao1} e {fracao2} é", fracao1 * fracao2)
     print(f"{fracao1} dividido por {fracao2} é", fracao1 / fracao2)
+    
+    # Comparações entre frações
     print(f"A fração {fracao1} é menor que {fracao2}?", fracao1 < fracao2)
     print(f"A fração {fracao1} é maior que {fracao2}?", fracao1 > fracao2)
     print(f"A fração {fracao1} é igual a {fracao2}?", fracao1 == fracao2)
     print(f"A fração {fracao1} é menor ou igual a {fracao2}?", fracao1 <= fracao2)
     print(f"A fração {fracao1} é maior ou igual a {fracao2}?", fracao1 >= fracao2)
 
-    print(f"A multiplicação de {fracao1} com 7 é", 7 * fracao1)
-    print(f"A divisão de {fracao1} com 7 é", 7 / fracao1)
+    # Operações entre inteiros e frações
+    print(f"A soma de {fracao1} com 7 é", fracao1 + 7)
+    print(f"A soma de 7 com {fracao1}", 7 + fracao1)
+    print(f"A diferença entre {fracao1} e 7 é", fracao1 - 7)
+    print(f"A diferença entre 7 e {fracao1}", 7 - fracao1)
+    print(f"A multiplicação de {fracao1} por 7 é", fracao1 * 7)
+    print(f"A multiplicação de 7 por {fracao1}", 7 * fracao1)
+    print(f"A divisão de {fracao1} por 7 é", fracao1 / 7)
+    print(f"A divisão de 7 por {fracao1}", 7 / fracao1)
