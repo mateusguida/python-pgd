@@ -95,3 +95,5 @@ if __name__ == '__main__':
     #     print(f"A fracao {fracao1} é igual que a {fracao2}")
     # else:
     #     print(f"A fracao {fracao1} é menor que a {fracao2}")
+
+    
