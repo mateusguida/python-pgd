@@ -1,5 +1,10 @@
+__pycache__/
+*.pyc
+
 /flags/venv
 /flags/img
 /carteirinha/venv
 /carteirinha/grafica
 /carteirinha/gabarito
+/starship/.venv
+/.venv
