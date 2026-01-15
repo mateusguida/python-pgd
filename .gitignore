@@ -7,4 +7,6 @@ __pycache__/
 /carteirinha/grafica
 /carteirinha/gabarito
 /starship/.venv
+/anim2d/.venv
+/anim2d/runs
 /.venv
