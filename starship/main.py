@@ -95,7 +95,7 @@ def main(output_dir:str, filename):
      for idx, img in enumerate(frames)]
     print("Gerando gif...")
     gifpath = os.path.join("runs", "gifs", filename)
-    save_gif(output_dir, gifpath, exclude=False)
+    save_gif(output_dir, gifpath, exclude=True)
     print(f"Gif salvo em {gifpath}")
 
 if __name__ == '__main__':
